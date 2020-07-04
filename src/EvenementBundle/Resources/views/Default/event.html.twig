@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+
+    {% block container %}
+
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+
+        {% block SubHeader %}
+            <!--// SubHeader \\-->
+            <div class="environment-subheader">
+                <span class="subheader-transparent"></span>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>Event Grid View</h1>
+                        </div>
+                        <div class="col-md-12">
+                            <ul class="environment-breadcrumb">
+                                <li><a href="index-2.html">Homepage</a></li>
+                                <li>Event </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--// SubHeader \\-->
+        {% endblock %}
+
+        <!--// Main Content \\-->
+        <div class="environment-main-content">
+
+            <!--// Main Section \\-->
+            <div class="environment-main-section">
+                <div class="container">
+                    <div class="row">
+
+                        {% block SideBaar %}
+                            <!--// SideBaar \\-->
+                            <aside class="col-md-3">
+
+                                <!--// Widget Search \\-->
+                                <div class="widget widget_search">
+                                    <form method="POST">
+                                        <input type="text" name="search" id="search" class="fa fa-search">
+                                        <label>
+                                            <input type="submit" value="">
+                                        </label>
+                                    </form>
+
+                                </div>
+                                <!--// Widget Search \\-->
+
+                                <!--// widget_trie \\-->
+                                <div class="widget widget_cetagories">
+                                    <div class="environment-widget-heading"><h2>Trier</h2></div>
+                                    <ul>
+                                        <li> <a class="col-6" href="{{ path('evenement_trie') }}"> <i class="fa fa-calendar-check-o"></i>trier par date</a></li>
+                                        <li> <a class="col-6" href="{{ path('evenement_trieetoile') }}"> <i class="fa fa-star"> </i>trier par etoile</a></li>
+                                        <li> <a class="col-6" href="{{ path('evenement_trieNbPart') }}"> <i class="fa fa-group"></i>trier par nombre de participant</a></li>
+                                        <li> <form method="get"><a href=""><i class="fa fa-refresh"></i></a></form></li>
+                                    </ul>
+                                </div>
+                                <!--// widget_trie \\-->
+
+                                <!--// widget_Cetagories \\-->
+                                <div class="widget widget_cetagories">
+                                    <div class="environment-widget-heading"><h2>Catagories</h2></div>
+                                    <ul>
+                                        <li><a href="{{ path('evenement_filterEvent' ,{'type':"Campagne de propreté"} )}}">Campagne de propreté</a></li>
+                                        <li><a href="{{ path('evenement_filterEvent' ,{'type':"conférence environnementale"} )}}">conférence environnementale</a></li>
+                                        <li><a href="{{ path('evenement_filterEvent' ,{'type':"jardinage"} )}}">jardinage</a></li>
+                                        <li><a href="{{ path('evenement_filterEvent' ,{'type':"bricolage recyclage"} )}}">bricolage recyclage</a></li>
+                                    </ul>
+                                </div>
+                            </aside>
+                            <!--// SideBaar \\-->
+
+                        {% endblock %}
+
+                        <div class="col-md-9">
+
+
+                            {% block body %}
+
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--// Main Section \\-->
+
+        </div>
+        <!--// Main Content \\-->
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+
+    {% endblock %}
+
+
+

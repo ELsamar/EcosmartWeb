@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+ {% block container %}
+
+     <div class="environment-main-section">
+         <div class="container">
+             <div class="row">
+
+                 <div class="col-md-12">
+                     <div class="environment-fancy-title"><h2>votre <span>invite</span></h2></div>
+                     <div class="environment-shop environment-shop-grid shop-grid-slider">
+
+                         {% for participation in participations %}
+                         <div class="environment-shop-border">
+                             <figure>
+                                 <a href="{{ path('evenement_detailRating' ,{'id':participation.event.id} )}}">
+                                     <img src="{{ asset('uploads/event/' ~ participation.event.affiche) }}"  style="height: 120px; width: 220px">
+
+                                     <i class="fa fa-search-plus"></i></a>
+                             </figure>
+                             <div class="environment-shop-grid-text">
+                                 <h4><a  href="{{ path('evenement_detailRating' ,{'id':participation.event.id} )}}">{{ participation.event.titre }}</a></h4>
+
+                                 <span class="environment-shop-cartbox">
+                                   Date: <div >{{ participation.event.start |date ('d-m-Y')}}</div>
+                                       <br>
+                                  {{ participation.event.description }}
+
+                                 </span>
+
+
+                                 <a  href="{{ path('evenement_acceptparti',{'ide':participation.event.id ,'idp':participation.id}) }}" class="environment-donate-btn">Participer</a>
+                                 <a href="{{ path('evenement_suppparticip',{'ide':participation.event.id ,'idp':participation.id}) }}" class="environment-donate-btn">pas intéresser</a>
+
+
+                             </div>
+                         </div>
+
+                         {% endfor %}
+
+                     </div>
+                 </div>
+
+             </div>
+         </div>
+     </div>
+ {% endblock %}

@@ -1,0 +1,59 @@
+{% extends '@User/Admin/base2.html.twig' %}
+
+{% block container %}
+<br><br><br>
+    <h3 class="box-title">Liste Des Membres</h3>
+<table  id="example" class="table table-striped table-bordered" style="width:100%">
+
+
+    <thead>
+
+    <tr>
+
+        <th>Nom</th>
+        <th>Prenom</th>
+
+        <th>Adresse</th>
+        <th>TEl</th>
+        <th>Score</th>
+
+
+
+
+
+
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for Membre in Membres %}
+        <tr>
+
+
+
+            <td>{{ Membre.nom }}</td>
+            <td>{{ Membre.Prenom}}</td>
+            <td>{{ Membre.Adresse }}</td>
+
+            <td>{{ Membre.NumContact }}</td>
+
+
+            <td>{{ Membre.Score}}</td>
+
+
+
+            <td><a href="{{ path('del_admemb',{'id':Membre.id}) }}" class="label label-info">Supprimer</a></td>
+
+
+
+
+
+
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

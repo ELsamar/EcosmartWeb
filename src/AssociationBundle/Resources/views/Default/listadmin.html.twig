@@ -1,0 +1,58 @@
+{% extends '@User/Admin/base2.html.twig' %}
+
+{% block container %}
+    <div class="row">
+    <div class="col-sm-10">
+    <div class="white-box" >
+    <h3 class="box-title">Les Associations </h3>
+
+
+
+    <div class="table-responsive">
+    <table class="table table-hover" >
+    <thead>
+    <tr>
+
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Adresse</th>
+        <th>Logo</th>
+
+        <th>Contact</th>
+        <th>Site </th>
+        <th></th>
+        <th></th>
+
+    </tr>
+    </thead>
+    <tbody>
+                            {% for Association in Associations %}
+
+
+                            <tr>
+
+
+                            <td> {{ Association.nom }}</td>
+                                <td>{{ Association.description }}</td>
+                                <td>{{ Association.adresse }}</td>
+                                <td><img src="{{ asset('uploads/Association/' ~ Association.logo) }}" style="height: 80px; width: 120px"> </td>
+                                <td>{{ Association.numContact }}</td>
+
+
+                                <td>{{ Association.site}}</td>
+
+                                <td><a href="{{ path('association_delete',{'id':Association.id}) }}" class="label label-info">Supprimer</a></td>
+
+
+                                <td><a href="{{ path('list_membreadm',{'id':Association.id}) }}"class="label label-info">Gestion Membre</a></td>
+
+
+
+                            </tr>
+                            {% endfor %}
+    </tbody>
+</table>
+    </div>
+    </div>
+    </div>
+{% endblock %}

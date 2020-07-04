@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block container %}
+    <br><br><br>
+    <table  id="example" class="table table-striped table-bordered" style="width:100%">
+
+
+        <thead>
+        <tr>
+
+
+            <th>Email</th>
+
+            <th>NumTel</th>
+            <th>Qualite</th>
+            <th>Experience</th>
+
+            <th>Motivation</th>
+            <th>Etat</th>
+            <th>Association</th>
+            <th>Etat</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for demande in demandes %}
+            <tr>
+
+
+
+                <td>{{ demande.Email }}</td>
+                <td>{{ demande.NumTel }}</td>
+                <td>{{ demande.Qualite }}</td>
+                <td>{{ demande.Experience}}</td>
+                <td>{{ demande.Motivation }}</td>
+
+                <td>{{ demande.Etat}}</td>
+                <td>{{ demande.Association.nom}}</td>
+                {% if demande.Etat=="En attente" %}
+
+
+                    <td> <a href="{{ path('modif_demande',{'id':demande.id }) }}">Modifier</a></td>
+                    <td> <a href="{{ path('delete_demande',{'id':demande.id }) }}">Supprimer</a></td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends '@User/Admin/base2.html.twig' %}
+{% block container %}
+
+    <div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <h3 class="box-title">list participant Evenement {{ event.titre }}
+                <form method="get">
+                    <a href="{{ path('evenement_listParticipation', {'id': event.id}) }}" ><i class="fa fa-refresh"></i></a>
+                </form></h3>
+                <div class="col-md-3 col-sm-4 col-xs-6 pull-right">
+
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    Filtrer</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ path('evenement_filtreParticipant', {'id': event.id}) }}">les participants</a>
+                    <a class="dropdown-item" href="{{ path('evenement_filtreInvite', {'id': event.id}) }}" >les invités</a>
+
+                </div>
+            </div>
+                </div>
+            <div class="table-responsive">
+                <table class="table ">
+                    <thead>
+                    <tr>
+                        <th>Nom d'utilisateur</th>
+                        <th>Nom Prenom </th>
+                        <th>Situation</th>
+                        <th>Date</th>
+                        <th>Email</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for participation in participations %}
+                    <tr>
+                        <td class="txt-oflo"> {{ participation.participant.username }} </td>
+                        <td class="txt-oflo"> {{ participation.participant.nom }}   {{ participation.participant.prenom }}</td>
+
+                       {% if (participation.type == 'participer') %}
+                        <td><span class="label label-megna label-rounded">participant</span> </td>
+
+                        {% elseif (participation.type == 'inviter') %}
+                        <td><span class="label label-success label-rounded">invité</span></td>
+                        {% endif %}
+                        <td class="txt-oflo">{{ participation.datedeparti |date("m/d/Y")  }}</td>
+                        <td><span class="txt-oflo"> {{  participation.participant.email }}</span></td>
+                    </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a href="#">Check all the sales</a> </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

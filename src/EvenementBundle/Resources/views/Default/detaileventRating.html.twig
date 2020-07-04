@@ -1,0 +1,289 @@
+{% extends '@Evenement/Default/event.html.twig' %}
+
+    {% block title %} EcoEnvironment Event Detail{% endblock %}
+
+   {% block SubHeader %}
+
+            <!--// SubHeader \\-->
+            <div class="environment-subheader">
+                <span class="subheader-transparent"></span>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>Greenhouse gas emissions</h1>
+                        </div>
+                        <div class="col-md-12">
+                            <ul class="environment-breadcrumb">
+                                <li><a href="index-2.html">Homepage</a></li>
+                                <li>Event Detail</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--// SubHeader \\-->
+   {% endblock %}
+
+{% block top %}
+{% endblock %}
+  {% block body %}
+      <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+
+                              {% if ( events.realise ==0  ) %}
+                                  <div class=" row alert alert-warning" role="alert" style=" box-shadow: 10px 10px grey">
+                                      l'événement est annulé
+                                  </div>
+                              {% endif %}
+   <div class="row">
+                              <figure class="environment-event-thumb">
+                                  <img id="img" src="{{ asset('uploads/event/' ~ events.affiche) }}" >
+
+                              </figure>
+                              <div class="environment-countdown">
+                                  <div id="environment-countdown"></div>
+                              </div>
+
+                              <div class="environment-rich-editor environment-event-richeditor">
+                                  <center> <p> <i class="fa fa-check">( {{ nbparticip }} )participants </i>
+                                   <i class="fa fa-mail-forward"> ( {{ nbinvit }})invités </i></p>
+                                      <i class="fa fa-eye"> {{ vu }}</i> </center>
+                                    <ul class="event-detail-option">
+                                              <li>
+                                                  Date:
+                                                  <time datetime="2008-02-14 20:00">{{ events.start |date ('d-m-Y')}}
+                                                  </time>
+                                            </li>
+                                        <li>
+                                            Heure:
+                                            <time datetime="2008-02-14 20:00">
+                                                {{ events.heure |date('H:i:s') }}
+                                            </time>
+                                        </li>
+                                            <li>
+                                                Organizer:
+                                                <p>{{ events.createur.nom }} {{ ' ' }}  {{ events.createur.prenom }}</p>
+                                            </li>
+                                            <li>
+                                                Location:
+                                                <p contenteditable="true"> {{ events.place }}</p>
+                                            </li>
+                                        </ul>
+                                  <div class="environment-section-heading"><h2><span>Event Description</span></h2></div>
+                                  <p contenteditable="true">{{ events.description }}.</p>
+                                    <div class="environment-section-heading"><h2><span>Event Location</span></h2></div>
+                                    <div class="environment-event-map">
+                                        <div id="map" data-alt="36.8983" data-long="10.1875"></div>
+                                    </div>
+
+                              </div>
+   </div>
+                  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+
+                  {% if (dateauj  > dateevent) %}
+                      <div class="comments-area">
+                          <!--// coments \\-->
+                          <div class="environment-section-heading"><h2><span>avis</span></h2></div>
+                          <div class="col-md-7 single-right-left simpleCart_shelfItem">
+                              <div> <h1>{{ events.etoile |rating(5, "fa-1x")  }}</h1></div>
+                              <div>( {{ events.etoile }}out of 5 | {{ nb }} ratings).</div>
+                              <h3>merci de noter l'événement </h3>
+                              <div>
+                                  {{ form_start(rev) }}
+                                  {{ form_end(rev) }}
+                              </div>
+
+                          </div>
+                          <ul class="comment-list">
+                              {% for review in reviews %}
+                                  <li>
+                                      <div class="thumb-list">
+                                          <figure><img alt="" src="{{ asset('/front/extra-images/comment-img1.jpg') }}"></figure>
+                                          <div class="text-holder">
+                                              <h6>{{  review.user.username }} </h6>
+                                              <time class="post-date" datetime="2008-02-14 20:00">{{ review.Dateajout |date("m/d/Y")  }}
+                                              </time>
+                                              <p>{{ review.commentaire }}.</p>
+                                              <a class="comment-reply-link" href="#">{{ review.note |rating(5, "fa-1x")  }} <i class="fa fa-share"></i></a>
+                                          </div>
+                                      </div>
+                                  </li>
+                              {% endfor %}
+                          </ul>
+                          <!-- #comment-## -->
+                      </div>
+                  {% else %}
+                <div class="row">
+                      <div class="col-md-2 "></div>
+                  <div class="col-md-4 ">
+                      {% if (particip) %}
+                          <a href="{{ path('evenement_suppparticip',{'ide':events.id ,'idp':particip.id}) }}"class="environment-readmore-btn" > annuler participation </a>
+                      {% elseif (( events.createur.id == app.user.id  )) %}
+                          <a href="#" class="environment-readmore-btn" disabled="true">participer</a>
+                      {% else %}
+                          <a href="{{ path('evenement_particip' ,{'id':events.id}) }}" class="environment-readmore-btn" >participer</a>
+                      {% endif %}
+                      <!--   <a href="#" data-toggle="modal" data-target="#exampleModal" class="environment-readmore-btn">inviter</a> -->
+                      <a href="{{ path('evenement_inviter' ,{'id':events.id}) }}" class="environment-readmore-btn" >inviter</a>
+
+                  </div>
+
+                  <div class="col-md-6">
+
+                          {% if ( events.createur.id == app.user.id  ) %}
+                              <a href="{{ path('evenement_updatevent', {'id':events.id}) }}" class="environment-readmore-btn">
+                                  modifier
+                              </a>
+                              {% if ( events.realise  ) %}
+                                  <a href="{{ path('evenement_annulerevent', {'id':events.id}) }}" class="environment-readmore-btn">
+                                      annuler
+                                  </a>
+                              {% endif %}
+
+                          {% endif %}
+
+                  </div>
+                </div>
+                  {% endif %}
+                      <div class="row">
+                          {% for message in app.flashes('info') %}
+                              <div class="alert alert-success">
+                                  {{ message }}
+                              </div>
+                          {% endfor %}
+
+                      </div>
+                  {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+                      <div class="row">
+                  <div class="alert alert-danger" role="alert">
+                          Pour participer ou inviter un amis à un evenement, il faut que vous vous <a href="{{ path('fos_user_security_login') }}">connecter </a>, Sinon
+                          <a href="{{ path('fos_user_registration_register') }}">Inscrivez vous</a>
+                  </div>
+                      </div>
+                      {% endif %}
+
+
+
+                                    <div class="environment-prenxt-post">
+                                        <ul>
+                                            <li>
+                                                <div class="environment-prev-post">
+                                                    <figure><a href="{{ path('evenement_detailRating' ,{'id':  events.id -1} )}}">
+                                                            <img src="{{ asset('front/extra-images/post-img1.jpg') }}" alt=""></a>
+                                                    </figure>
+                                                    <div class="environment-prev-artical">
+                                                        <h3><a href="404.html">Suspendisse id velit lectu Phasellus ipsum</a></h3>
+                                                        <a href="404.html" class="environment-post-arrow"><i class="fa fa-angle-left"></i> événement précédent</a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="environment-next-post">
+                                                    <figure><a href="{{ path('evenement_detailRating' ,{'id':  events.id +11} )}}">
+                                                            <img src="{{ asset('front/extra-images/post-img2.jpg') }}" alt="">
+                                                        </a></figure>
+                                                    <div class="environment-next-artical">
+                                                        <h3><a href="404.html">Suspendisse id velit lectu Phasellus ipsum</a></h3>
+                                                        <a href="404.html" class="environment-post-arrow">événement suivant <i class="fa fa-angle-right"></i></a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="environment-tag-wrap">
+                                        <div class="environment-post-tags">
+                                            <div class="environment-tags">
+                                                <span>Tags:</span>
+                                                <a href="404.html">Energy</a>
+                                                <a href="404.html">Animals</a>
+                                                <a href="404.html">Help</a>
+                                            </div>
+                                            <div class="environment-blog-social">
+                                                <ul>
+                                                    <li><span>Share:</span></li>
+                                                    <li><a href="https://www.facebook.com/" class="icon-facebook2"></a></li>
+                                                    <li><a href="https://twitter.com/login" class="icon-social43"></a></li>
+                                                    <li><a href="https://pk.linkedin.com/" class="icon-linkedin"></a></li>
+                                                    <li><a href="https://plus.google.com/" class="icon-google-plus2"></a></li>
+
+                                                </ul>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    {{ socialButtons( {'facebook':false} ) }}
+                                                    <a href="https://www.facebook.com/dialog/feed?app_id=2044694468947734&display=popup&link=https%3A%2F%2Fmaktoob.yahoo.com%2Fdocs%2F&redirect_uri=http://localhost/PItest/web/app_dev.php/partager"
+                                                    class="icon-facebook2 btn-facebook">
+                                                        partager
+                                                    </a>
+                                                    <a href=" http://www.facebook.com/dialog/send?app_id=2044694468947734&amp;link=http://www.nytimes.com/interactive/2015/04/15/travel/europe-favorite-streets.html&amp;redirect_uri=http://localhost/PItest/web/app_dev.php/partager"
+                                                       class=" icon-mail btn-facebook">
+
+                                                        envoyer
+                                                    </a>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+      <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          Launch demo modal
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body" >
+                      <form  method="POST" >
+
+                          <label> Rechercher un amie </label>
+                          <input type="text" name="nom"> <br>
+                          <input type="button" value="rechercher">
+
+                          <div id="usersearch">
+                              {% for user  in users %}
+                                  <b> nom </b> {{ user.nom }} <br>
+                              {% endfor %}
+
+                          </div>
+
+
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <script type="text/javascript">
+
+          FB.ui({
+              method: 'feed',
+              link: 'http://localhost/PItest/web/app_dev.php'
+
+          }, function(response){});
+          FB.ui({
+              method: 'send',
+              link: 'http://www.nytimes.com/interactive/2015/04/15/travel/europe-favorite-streets.html',
+          });
+      </script>
+
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+      <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+
+  {% endblock  %}

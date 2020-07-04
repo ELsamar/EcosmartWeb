@@ -1,0 +1,27 @@
+{% extends "@Map/base.html.twig" %}
+
+{% block title %}Ecosmart Map{% endblock %}
+
+{% block body %}
+
+    <div class="environment-widget-heading">    <h1>Bienvenue sur <span>ecosmart Map</span> </h1></div>
+
+
+    <p> ecoSmart enregistré dans la base de données: <span id="poiSaved"></span></p>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div class="row">
+        <aside class="col-md-3 widget ">
+            <div class="environment-footer-title"><h2>map cle</h2></div>
+           <p> notre reseau dans une map ..</p>
+            <ul>
+                <li><i class="fa fa-map-marker" style="color: #424bf4"> produit</i></li>
+                <li><i  style="color: #eb42f4" class="fa fa-map-marker">annonce</i></li>
+                <li><i style="color: #e2ce1b" class="fa fa-map-marker">evenement</i></li>
+                <li><i  style="color: #db2915" class="fa fa-map-marker">associtaion</i></li>
+            </ul>
+        </aside>
+
+    <div id="MAPS" style="width: 600px; height: 450px; border: 1px solid black; background: gray;" class="col-md-9 centered-content"></div>
+    </div>
+
+{% endblock %}

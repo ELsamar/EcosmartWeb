@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block container %}
+<br><br><br>
+<table  id="example" class="table table-striped table-bordered" style="width:100%">
+
+
+    <thead>
+    <tr>
+
+        <th>Nom</th>
+        <th>Email</th>
+
+        <th>NumTel</th>
+        <th>Qualite</th>
+        <th>Experience</th>
+
+        <th>Motivation</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for demande in demandes %}
+        <tr>
+
+
+
+            <td>{{ demande.nom }}</td>
+            <td>{{ demande.Email }}</td>
+            <td>{{ demande.NumTel }}</td>
+            <td>{{ demande.Qualite }}</td>
+            <td>{{ demande.Experience}}</td>
+            <td>{{ demande.Motivation }}</td>
+            <td><a href="{{ path('accept_membre',{'id':demande.Utilisateur.id,'ida':demande.Association.id,'idd':demande.id}) }}">Accepter</a></td>
+            <td><a href="{{ path('refuser_membre',{'idd':demande.id}) }}">Refuser</a></td>
+
+
+
+
+
+
+
+
+
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+ecosystem_admin_dashboard:
+    path:     /admin
+    defaults: { _controller: UserBundle:Default:admin }
+ecosystem_admin_users:
+    path:     /admin/users
+    defaults: { _controller: UserBundle:GestionUser:index }
+ecosystem_admin_users_delete:
+    path:     /admin/users/delete/{id}
+    defaults: { _controller: UserBundle:GestionUser:delete }
+    methods: [DELETE]
+
+citoyen_home:
+    path:     /citoyen
+    defaults: { _controller: UserBundle:Default:citoyen }
+
+recycleur_home:
+    path:     /recycleur
+    defaults: { _controller: UserBundle:Default:recycleur }
+
+collecteur_home:
+    path:     /collecteur
+    defaults: { _controller: UserBundle:Default:collecteur }

@@ -1,0 +1,90 @@
+evenement_:
+    path:     /aceuil
+    defaults: { _controller: EvenementBundle:Default:index }
+evenement_homepage:
+    path:     /
+    defaults: { _controller: EvenementBundle:Evenement:event }
+evenement_addevent:
+    path:     /add
+    defaults: { _controller: EvenementBundle:Evenement:addevent }
+evenement_listevent:
+    path:     /list
+    defaults: { _controller: EvenementBundle:Evenement:list }
+evenement_detail:
+    path:     /detail
+    defaults: { _controller: EvenementBundle:Evenement:detailevent }
+evenement_adminlist:
+    path:     /admin/detailadmin
+    defaults: { _controller: EvenementBundle:Evenement:listnonactept }
+evenement_Accepterevent:
+    path:     /Accepterevent
+    defaults: { _controller: EvenementBundle:Evenement:Acceptevent }
+evenement_Suppevent:
+    path:     /Suppevent
+    defaults: { _controller: EvenementBundle:Evenement:suppevent }
+evenement_particip:
+    path:     /particip
+    defaults: { _controller: EvenementBundle:Participation:participate }
+evenement_suppparticip:
+    path:     /suppparticip
+    defaults: { _controller: EvenementBundle:Participation:supppparticip }
+evenement_recherchUser:
+    path:     /rech
+    defaults: { _controller: EvenementBundle:Evenement:chercheuser }
+evenement_updatevent:
+    path:     /updatevent
+    defaults: { _controller: EvenementBundle:Evenement:updateevent }
+evenement_annulerevent:
+    path:     /annulerevent
+    defaults: { _controller: EvenementBundle:Evenement:annulevent }
+evenement_myevent:
+    path:     /myevent
+    defaults: { _controller: EvenementBundle:Evenement:userevent }
+evenement_myparticip:
+    path:     /myparticip
+    defaults: { _controller: EvenementBundle:Participation:myparticip }
+evenement_myinvitep:
+    path:     /myinvitep
+    defaults: { _controller: EvenementBundle:Participation:Myinvitep }
+evenement_acceptparti:
+    path:     /acceptparti
+    defaults: { _controller: EvenementBundle:Participation:acceptparti }
+evenement_calendar:
+    path:     /calendar
+    defaults: { _controller: EvenementBundle:Evenement:calendar }
+evenement_filterEvent:
+    path:     /filterEvent
+    defaults: { _controller: EvenementBundle:Evenement:filterEvent }
+evenement_trie:
+    path:     /triedate
+    defaults: { _controller: EvenementBundle:Evenement:trierEvent }
+evenement_trieetoile:
+    path:     /trieetoile
+    defaults: { _controller: EvenementBundle:Evenement:trieretoileEvent }
+evenement_trieNbPart:
+    path:     /trieNbPart
+    defaults: { _controller: EvenementBundle:Evenement:trierParti }
+evenement_detailRating:
+    path:     /detailRatingevent
+    defaults: { _controller: EvenementBundle:Evenement:detailRatingevent }
+evenement_ajax_search:
+    path:     /searchuser
+    defaults: { _controller: EvenementBundle:Participation:search}
+evenement_inviter:
+    path:     /inviter
+    defaults: { _controller: EvenementBundle:Participation:inviterEvent }
+evenement_ajoutInvite:
+    path:     /ajoutinvit/{iduser}/{idevent}
+    defaults: { _controller: EvenementBundle:Participation:ajoutinvit }
+evenement_listParticipation:
+    path:     /listParticipation
+    defaults: { _controller: EvenementBundle:Participation:listParticipant }
+evenement_filtreParticipant:
+    path:     /filtreParticipant/{id}
+    defaults: { _controller: EvenementBundle:Participation:filtreParticipant }
+evenement_filtreInvite:
+    path:     /filtreInvite/{id}
+    defaults: { _controller: EvenementBundle:Participation:filtreinvite }
+evenement_topevent:
+    path:     /listTopEvent
+    defaults: { _controller: EvenementBundle:Evenement:listTopEvent }

@@ -1,0 +1,29 @@
+{% extends '@Evenement/Default/event.html.twig' %}
+
+{% block body %}
+    {% block top %}
+        <nav>
+            <div class="environment-widget-heading"><h2>Top event</h2></div>
+
+            <div class="environment-project environment-project-grid">
+                <ul class="row">
+                    {% for event in events %}
+                        <li class="col-md-3">
+                            <figure>
+                                <a href="project-detail.html"> <img src="{{ asset('uploads/event/' ~ event.affiche) }}" ><i class="fa fa-share-square-o"></i></a>
+                            </figure>
+                            <section>
+                                <h5><a href="project-detail.html">{{ event.titre }}</a></h5>
+                                <span>Lorem ipsum</span>
+                            </section>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+
+        </nav>
+    {% endblock %}
+
+{% endblock %}

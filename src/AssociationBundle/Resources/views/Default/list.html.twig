@@ -1,0 +1,144 @@
+{% extends 'base.html.twig' %}
+{% block container %}
+    <div class="sidebar-search">
+        <div class="input-group custom-search-form">
+            <input type="text" id="search" class="form-control" placeholder="Suche...">
+        </div>
+        <!-- /input-group -->
+    </div>
+    <ul class="nav" id="side-menu">
+        <li>
+            <a href="#"> Entities<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level" id="entitiesNav">
+            </ul>
+        </li>
+    </ul>
+<div class="environment-subheader">
+    <span class="subheader-transparent"></span>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Les Associations  </h1>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="environment-main-content">
+    <!--// Main Section \\-->
+    <div class="environment-main-section">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="environment-blog environment-blog-grid">
+                        <ul class="row">
+                            {% for Association in Associations %}
+                            <li class="col-md-4">
+
+                                <figure> <a><img src="{{ asset('uploads/Association/' ~ Association.logo) }}" >
+                                    <i class="fa fa-share-square-o"></i></a></figure>
+                                <div class="environment-blog-grid-text">
+                                    <center><h4> {{ Association.nom }}</h4></center>
+                                   <p><h5 style="display: inline">Description  :  </h5>{{ Association.description }}</p>
+                                    <p> <h5 style="display: inline">Adresse  :  </h5>{{ Association.adresse }}</p>
+
+                                    <p><h5 style="display: inline">Contact  :  </h5>{{ Association.numContact }}</p>
+                                    <a href="{{ path('mail_send') }}"> send mail</a>
+
+                                    <p><h5 style="display: inline">Site Web  :  </h5>{{ Association.site}}</p>
+                                    <ul class="blog-grid-option">
+
+                                    {% if Association.responsable==responsable %}
+                                        <li> <a href="{{ path('association_update',{'id':Association .id}) }}">Modifier</a></li>
+                                        <li> <a href="{{ path('association_delete',{'id':Association.id}) }}">Supprimer</a></li>
+                                         <li><a href="{{ path('liste_demande',{'id':Association.id}) }}">Consulter demande</a></li>
+                                        <li><a href="{{ path('list_membre',{'id':Association.id}) }}">Gestion Membre</a></li>
+
+
+                                    {% else%}
+                                         <li><a href="{{ path('association_demande',{'id':Association.id }) }}">Demander rejoindre</a> </li>
+
+
+
+
+                                        <li>
+
+                                            <a href="{{ path('association_like', {'id':Association.id}) }}" class="btn btn-link js-like">
+                                                {% if app.user and Association.isLikeByUser(app.user) %}
+
+                                                    <i class="fas fa-thumbs-up"></i>
+
+                                                {% else %}
+                                                    <i class="far fa-thumbs-up"></i>
+
+                                                {% endif %}
+                                                <span class="js-likes">{{ Association.likes | length }}</span>
+
+                                                <span class="js-label">J'aime</span>
+                                            </a>
+                                        </li>
+
+
+                                    {% endif %}
+
+                                    </ul>
+                    </div>
+                    </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--// Main Section \\-->
+
+    </div>
+    <!-- jQuery is necessary -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 3;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('ajax_recherhce') }}",
+                        data: {
+                            'q' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value==$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key == 'entities') {
+                                            if (id != 'error') {
+                                                entitySelector.append('<li><a href="/Ecosmartweb/web/app_dev.php/association/detailled/'+id+'">'+value+'</a></li>');
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    {% endblock %}

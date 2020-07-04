@@ -1,0 +1,54 @@
+{% extends '@User/Admin/base2.html.twig' %}
+{% block container %}
+
+    <div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <h3 class="box-title">tout les utilisateurs   </h3>
+
+            <form method="get">
+                <a href=""><i class="fa fa-refresh"></i></a>
+            </form>
+            <form class="app-search hidden-xs" method="post">
+                <input type="text" placeholder="Search..." class="form-control" name="search">
+                <a href=""><i class="fa fa-search"></i></a>
+
+            </form>
+
+            <div class="table-responsive">
+
+                <table id="user" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>email </th>
+                        <th>prenom </th>
+                        <th>adresse </th>
+                        <th>Photo </th>
+                        <th>action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr id="user-{{ user.id }}" class="">
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.nom }} {{ user.prenom  }}</td>
+                            <td> {{ user.adresse }}</td>
+                            <td></td>
+                            <td>
+                                <a class="btn btn-light" href="/admin/user/edit/{{ user.id }}">bloquer</a>
+
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

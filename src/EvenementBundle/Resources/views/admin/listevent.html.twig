@@ -1,0 +1,88 @@
+{% extends '@User/Admin/base2.html.twig' %}
+{% block container %}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box">
+                <h3 class="box-title">Evenement en attente</h3>
+
+                <div class="table-responsive">
+                    <table class="table table-hover" >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Titre event</th>
+                            <th>organisateur</th>
+                            <th>Description</th>
+                            <th>Place </th>
+                            <th>Affiche</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for event in eventNa %}
+                        <tr>
+                            <td>{{ event.id }}</td>
+                            <td>{{ event.titre }}</td>
+                            <td>{{ event.createur.nom }} {{ event.createur.prenom  }}</td>
+                            <td> {{ event.place }}</td>
+                            <td><img src="{{ asset('uploads/event/' ~ event.affiche) }}"  style="height: 80px; width: 120px"> </td>
+                            <td><a href="{{ path('evenement_Suppevent' ,{'id':event.id} )}}" class="label label-danger">refuser</a>
+                                <a href="{{ path('evenement_Accepterevent' ,{'id':event.id} )}}"class="label label-success">accepter</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="col-sm-12">
+        <div class="white-box">
+            <h3 class="box-title">tous Evenement  </h3>
+
+            <form method="get">
+                <a href=""><i class="fa fa-refresh"></i></a>
+            </form>
+            <form class="app-search hidden-xs" method="post">
+                <input type="text" placeholder="Search..." class="form-control" name="search">
+                <a href=""><i class="fa fa-search"></i></a>
+
+            </form>
+
+            <div class="table-responsive">
+                <table class="table table-hover" >
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Titre event</th>
+                        <th>organisateur</th>
+                        <th>Description</th>
+                        <th>Place </th>
+                        <th>Affiche</th>
+                        <th>Liste des participants</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for event in eventa %}
+                        <tr>
+                            <td>{{ event.id }}</td>
+                            <td>{{ event.titre }}</td>
+                            <td>{{ event.createur.nom }} {{ event.createur.prenom  }}</td>
+                            <td> {{ event.description }}</td>
+                            <td> {{ event.place }}</td>
+                            <td><img src="{{ asset('uploads/event/' ~ event.affiche) }}"  style="height: 80px; width: 120px"> </td>
+                            <td><a href="{{ path('evenement_listParticipation' ,{'id':event.id} )}}" >afficher liste</a>
+                            <td><a href="{{ path('evenement_Suppevent' ,{'id':event.id} )}}" class="label label-danger">supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% block container %}
+
+    <div class="environment-subheader">
+        <span class="subheader-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Les Associations  </h1>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="environment-main-content">
+        <!--// Main Section \\-->
+          <div class="environment-main-section">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="environment-blog environment-blog-grid">
+                            <ul class="row">
+
+
+                                    <li class="col-md-4">
+
+                                        <figure> <a><img src="{{ asset('uploads/Association/' ~ Association.logo) }}" >
+                                                <i class="fa fa-share-square-o"></i></a></figure>
+                                        <div class="environment-blog-grid-text">
+                                            <center><h4> {{ Association.nom }}</h4></center>
+                                            <p><h5 style="display: inline">Description  :  </h5>{{ Association.description }}</p>
+                                            <p> <h5 style="display: inline">Adresse  :  </h5>{{ Association.adresse }}</p>
+
+                                            <p><h5 style="display: inline">Contact  :  </h5>{{ Association.numContact }}</p>
+
+
+                                            <p><h5 style="display: inline">Site Web  :  </h5>{{ Association.site}}</p>
+
+                                        </div>
+                                    </li>
+
+                            </ul>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--// Main Section \\-->
+
+    </div>
+    <!-- jQuery is necessary -->
+
+{% endblock %}

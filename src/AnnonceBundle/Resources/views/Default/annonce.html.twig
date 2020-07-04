@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block container %}
+
+
+
+<!--// Main Section \\-->
+    <div class="environment-subheader">
+        <span class="subheader-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Our Gallery W/R/Sidebar</h1>
+                </div>
+                <div class="col-md-12">
+                    <ul class="environment-breadcrumb">
+                        <li><a href="index.html">Homepage</a></li>
+                        <li>Our Gallery</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="environment-main-section">
+    <div class="container">
+        <div class="row">
+            <br><br><br><br><br><br><br><br><br><br>
+            <div class="col-md-12">
+                <div class="environment-project environment-project-grid">
+                    <ul class="row">
+                        {%  for annonces in annonces %}
+                        <li class="col-md-3">
+                            <figure><a href="{{ path('show_detailed_annonce',{'id':annonces.id}) }}"><img src="{{ asset('uploads/annonce/' ~ annonces.photo) }}" alt=""><i class="fa fa-share-square-o"></i></a></figure>
+
+                            <section>
+                                <h5><a href="project-detail.html">{{ annonces.titre }}</a></h5>
+                                <span>Nombre de Likes : {{ annonces.likes|length }}</span>
+
+                            </section>
+                        </li>
+                   {% endfor %}
+                    </ul>
+                </div>
+                <!--// Pagination \\-->
+                <div class="environment-pagination">
+                    <ul class="page-numbers">
+                        <li><a class="previous page-numbers" href="404.html"><span aria-label="Next"><i class="fa fa-angle-left"></i></span></a></li>
+                        <li><span class="page-numbers current">1</span></li>
+                        <li><a class="page-numbers" href="404.html">2</a></li>
+                        <li><a class="page-numbers" href="404.html">3</a></li>
+                        <li><a class="page-numbers" href="404.html">4</a></li>
+                        <li><a class="next page-numbers" href="404.html"><span aria-label="Next"><i class="fa fa-angle-right"></i></span></a></li>
+                    </ul>
+                </div>
+                <!--// Pagination \\-->
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--// Main Section \\-->
+
+{% endblock %}

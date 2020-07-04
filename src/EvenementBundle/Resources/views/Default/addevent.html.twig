@@ -1,0 +1,38 @@
+{% extends '@Evenement/Default/event.html.twig' %}
+
+  {% block SubHeader %}
+      <!--// SubHeader \\-->
+      <div class="environment-subheader">
+          <span class="subheader-transparent"></span>
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-12">
+                      <h1>Event Grid View</h1>
+                  </div>
+                  <div class="col-md-12">
+                      <ul class="environment-breadcrumb">
+                          <li><a href="index-2.html">Homepage</a></li>
+                          <li> add Event </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!--// SubHeader \\-->
+  {% endblock %}
+ {% block top %}
+ {% endblock %}
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+    {% endfor %}
+{{ form(form) }}
+{% endblock %}

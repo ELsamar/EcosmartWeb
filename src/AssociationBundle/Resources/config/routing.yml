@@ -1,0 +1,76 @@
+association_homepage:
+    path:     /
+    defaults: { _controller: AssociationBundle:Association:association }
+association_Add:
+    path:     /add
+    defaults: { _controller: AssociationBundle:Association:add }
+association_Afficher:
+    path:     /lister
+    defaults: { _controller: AssociationBundle:Association:lister }
+association_update:
+    path:     /update
+    defaults: { _controller: AssociationBundle:Association:update }
+association_delete:
+    path:     /del
+    defaults: { _controller: AssociationBundle:Association:delete }
+association_demande:
+    path:     /dem
+    defaults: { _controller: AssociationBundle:Demande:demande }
+liste_demande:
+    path:     /lisdem
+    defaults: { _controller: AssociationBundle:Demande:list }
+mes_demande:
+    path:     /mydem
+    defaults: { _controller: AssociationBundle:Demande:mesdemandes }
+modif_demande:
+    path:     /moddem
+    defaults: { _controller: AssociationBundle:Demande:modifdeman }
+delete_demande:
+    path:     /deldeman
+    defaults: { _controller: AssociationBundle:Demande:deldemande }
+add_membre:
+    path:     /addmeb
+    defaults: { _controller: AssociationBundle:Membre:Memb }
+modif_membre:
+    path:     /modmeb
+    defaults: { _controller: AssociationBundle:Membre:update }
+list_membre:
+    path:     /listmeb
+    defaults: { _controller: AssociationBundle:Membre:lister }
+del_membre:
+    path:     /delmeb
+    defaults: { _controller: AssociationBundle:Membre:del }
+
+accept_membre:
+    path:     /accept
+    defaults: { _controller: AssociationBundle:Demande:accept }
+refuser_membre:
+    path:     /refu
+    defaults: { _controller: AssociationBundle:Demande:refuser }
+association_like:
+    path:     /association/{id}/like
+    defaults: { _controller: AssociationBundle:Association:like }
+association_admin:
+    path:     /adminas
+    defaults: { _controller: AssociationBundle:Association:listadmin }
+list_membreadm:
+    path:     /listadm
+    defaults: { _controller: AssociationBundle:Membre:listeradm }
+del_admemb:
+    path:     /delmebadd
+    defaults: { _controller: AssociationBundle:Membre:deladm }
+mail_send:
+    path:     /send
+    defaults: { _controller: AssociationBundle:Default:send }
+stat_admin:
+    path:     /stat
+    defaults: { _controller: AssociationBundle:Association:stat }
+stat2_admin:
+    path:     /statnb
+    defaults: { _controller: AssociationBundle:Association:statnb }
+ajax_recherhce:
+    path:     /rech
+    defaults: { _controller: AssociationBundle:Default:search }
+detail_association:
+    path:     /detailled/{id}
+    defaults: { _controller: AssociationBundle:Association:detail }

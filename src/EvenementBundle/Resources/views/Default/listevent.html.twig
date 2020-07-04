@@ -1,0 +1,72 @@
+{% extends '@Evenement/Default/event.html.twig' %}
+
+{% block SubHeader %}
+        <!--// SubHeader \\-->
+        <div class="environment-subheader">
+            <span class="subheader-transparent"></span>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Event Grid View</h1>
+                    </div>
+                    <div class="col-md-12">
+                        <ul class="environment-breadcrumb">
+                            <li><a href="index-2.html">Homepage</a></li>
+                            <li>Event liste</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--// SubHeader \\-->
+
+{% endblock %}
+
+
+{% block body %}
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="environment-event environment-modren-event">
+            <ul class="row">
+                {% for event in events %}
+                    <li class="col-md-12">
+                        <figure>
+                            <a href="{{ path('evenement_detailRating' ,{'id':event.id} )}}">
+                                <img src="{{ asset('uploads/event/' ~ event.affiche) }}" style="height: 350px ; width: 400px" >
+                                <i class="fa fa-search-plus"></i></a>
+                            <time datetime="2008-02-14 20:00">
+                                <i class="fa fa-calendar"></i>
+                                {{ event.start  |date ('d-m-Y')}} </time>
+                        </figure>
+                        <div class="environment-modren-event-text">
+                            <h3><a href="{{ path('evenement_detailRating' ,{'id':event.id} )}}">{{ event.titre}} </a></h3>
+                            <ul class="environment-event-option">
+                                <li>
+                                    <i class="fa fa-clock-o"></i>
+                                    Time:
+                                    <time datetime="2008-02-14 20:00">  {{ event.heure |date('H:i') }}</time>
+                                </li>
+                                <li>
+                                    <i class="fa fa-map-marker"></i>
+                                    Location :
+                                    <p>{{ event.place }}</p>
+                                </li>
+                            </ul>
+                            <p>{{ event.description}}  .</p>
+                            <div> <h1>{{ event.etoile |rating(5, "fa-1x")  }}</h1></div>
+                            <div>( {{ event.etoile }}out of 5 ).</div>
+
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+

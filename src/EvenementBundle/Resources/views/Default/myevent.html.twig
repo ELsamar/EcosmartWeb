@@ -1,0 +1,86 @@
+{% extends '@Evenement/Default/event.html.twig' %}
+  {% block SubHeader %}
+<!--// SubHeader \\-->
+<div class="environment-subheader">
+    <span class="subheader-transparent"></span>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1> List des événements</h1>
+            </div>
+            <div class="col-md-12">
+                <ul class="environment-breadcrumb">
+                    <li><a href="{{ path('evenement_listevent') }}"> List des événements</a></li>
+                    <li> Mes événements</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--// SubHeader \\-->
+  {% endblock %}
+{% block body %}
+    <!--// Main Content \\-->
+    <div class="environment-main-content">
+
+        <!--// Main Section \\-->
+        <div class="environment-main-section">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="environment-event environment-modren-event">
+                            <ul class="row">
+                                {% for event in events %}
+                                <li class="col-md-12">
+                                    <figure>
+                                        <a href="{{ path('evenement_detailRating' ,{'id':event.id} )}}">
+                                            <img src="{{ asset('uploads/event/' ~ event.affiche) }}" style="height: 350px ; width: 400px" >
+                                            <i class="fa fa-share-square-o"></i></a>
+                                        <time datetime="2008-02-14 20:00">{{ event.start  |date ('d-m-Y')}}</time>
+                                    </figure>
+                                    <div class="environment-modren-event-text">
+                                        <h3><a href="{{ path('evenement_detailRating' ,{'id':event.id} )}}">{{ event.titre}} </a></h3>
+                                        <ul class="environment-event-option">
+                                            <li>
+                                                <i class="fa fa-clock-o"></i>
+                                                Time:
+                                                <time datetime="2008-02-14 20:00"> {{ event.heure |date('H:i:s') }}</time>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-map-marker"></i>
+                                                Location :
+                                                <p>{{ event.place }}</p>
+                                            </li>
+                                        </ul>
+                                        <p>{{ event.description}}
+                                            <br>
+                                            <br>
+                                            <br>.</p>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!--// Pagination \\-->
+                        <div class="environment-pagination">
+                            <ul class="page-numbers">
+                                <li><a class="previous page-numbers" href="404.html"><span aria-label="Next"><i class="fa fa-angle-left"></i></span></a></li>
+                                <li><span class="page-numbers current">1</span></li>
+                                <li><a class="page-numbers" href="404.html">2</a></li>
+                                <li><a class="page-numbers" href="404.html">3</a></li>
+                                <li><a class="page-numbers" href="404.html">4</a></li>
+                                <li><a class="next page-numbers" href="404.html"><span aria-label="Next"><i class="fa fa-angle-right"></i></span></a></li>
+                            </ul>
+                        </div>
+                        <!--// Pagination \\-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--// Main Section \\-->
+
+    </div>
+    <!--// Main Content \\-->
+{% endblock %}

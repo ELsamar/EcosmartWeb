@@ -1,0 +1,105 @@
+
+{% extends 'base.html.twig' %}
+
+{% block container %}
+
+    {% block SubHeader %}
+        <!--// SubHeader \\-->
+        <div class="environment-subheader">
+            <span class="subheader-transparent"></span>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Evenement </h1>
+                    </div>
+                    <div class="col-md-12">
+                        <ul class="environment-breadcrumb">
+                            <li><a href="index-2.html">Homepage</a></li>
+                            <li>Evenement {{ event.titre }}</li>
+                            <li> inviter </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--// SubHeader \\-->
+
+    {% endblock %}
+    <br>
+
+<body>
+<div class="environment-fancy-title"><h2>Inviter votre <span>amis </span></h2></div>
+<div class="sidebar-search">
+    <div class="input-group custom-search-form">
+        <input type="text" id="search" class="form-control" placeholder="chercher un amis ...">
+    </div>
+    <!-- /input-group -->
+</div>
+<ul class="nav" id="side-menu">
+    <li>
+        <a href="#"> Amis : <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level" id="entitiesNav" data-id="{{ event.id }}" >
+        </ul>
+    </li>
+
+</ul>
+</body>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="{{ asset('front/js/jquery-3.2.1.js') }}"></script>
+{{ parent() }}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+
+            var plant = document.getElementById('entitiesNav');
+            var idevent = plant.getAttribute('data-id');
+
+
+            $("#search").keyup(function() {
+                var minlength = 3;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('evenement_ajax_search') }}",
+                        data: {
+                            'q' : value,
+                        },
+                        dataType: "text",
+                        success: function(msg,e){
+                            //we need to check if the value is the same
+                            if (value===$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key === 'entities') {
+                                            if (id !== 'error') {
+
+                                                entitySelector.append('<li><a href=" /Ecosmartweb/web/app_dev.php/evenement/ajoutinvit/'+id+'/'+idevent+'">'+value+'</a></li>');
+                                                //   entitySelector.append('<li><a href=" /Ecosmartweb/web/app_dev.php/evenement/ajoutinvit/'+id+idevent+'">'+value+'</a></li>');
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}
